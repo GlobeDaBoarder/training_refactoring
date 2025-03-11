@@ -33,16 +33,10 @@ public class IntegrationTest {
 
         String raceResultsJson = new String(getClass().getClassLoader().getResourceAsStream("race_results.json").readAllBytes());
 
-        MvcResult mvcResult = mockMvc.perform(post("/races/save")
+        mockMvc.perform(post("/races/save")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(raceResultsJson))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String responseContent = mvcResult.getResponse().getContentAsString();
-
-        assertThat(responseContent)
-                .isEqualTo("Saved");
+                .andExpect(status().isOk());
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.andersen.training.training_refactoring;
+package com.andersen.training.training_refactoring.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +7,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,13 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class RaceEvent {
+
+    @Builder
+    public RaceEvent(LocalDate date, RaceTrack raceTrack, Set<RaceResult> raceResults) {
+        this.date = date;
+        this.raceTrack = raceTrack;
+        this.raceResults = raceResults;
+    }
 
     @Id
     @GeneratedValue

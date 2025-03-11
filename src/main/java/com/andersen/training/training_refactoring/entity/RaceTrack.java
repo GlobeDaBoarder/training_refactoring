@@ -1,25 +1,24 @@
-package com.andersen.training.training_refactoring;
+package com.andersen.training.training_refactoring.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Driver {
+@AllArgsConstructor
+@Builder
+public class RaceTrack {
 
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    private String driverName;
+    private String trackName;
 
-    private String carBrand;
+    private String country;
 }
