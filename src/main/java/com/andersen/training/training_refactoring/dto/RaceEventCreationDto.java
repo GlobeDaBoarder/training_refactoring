@@ -1,4 +1,4 @@
-package com.andersen.training.training_refactoring.dto.request;
+package com.andersen.training.training_refactoring.dto;
 
 import lombok.Builder;
 

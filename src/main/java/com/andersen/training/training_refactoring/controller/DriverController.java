@@ -1,17 +1,16 @@
 package com.andersen.training.training_refactoring.controller;
 
-import com.andersen.training.training_refactoring.dto.request.DriverCreationDto;
-import com.andersen.training.training_refactoring.dto.response.DriverResponseDto;
+import com.andersen.training.training_refactoring.dto.DriverCreationDto;
 import com.andersen.training.training_refactoring.service.DriverService;
+import com.andersen.training.training_refactoring.service.PredictionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("api/v1/driver")
@@ -19,17 +18,17 @@ import java.net.URI;
 public class DriverController {
 
     private final DriverService driverService;
+    private final PredictionService predictionService;
 
     @PostMapping
-    public ResponseEntity<DriverResponseDto> addDriver(@RequestBody DriverCreationDto driverCreationDto) {
-        DriverResponseDto driverResponseDto = driverService.addDriver(driverCreationDto);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addDriver(@RequestBody DriverCreationDto driverCreationDto) {
+        driverService.addDriver(driverCreationDto);
+    }
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(driverResponseDto.id())
-                .toUri();
-
-        return ResponseEntity.created(location).body(driverResponseDto);
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public String predictDriverWinningChance() {
+        return predictionService.predictWinningChance();
     }
 }

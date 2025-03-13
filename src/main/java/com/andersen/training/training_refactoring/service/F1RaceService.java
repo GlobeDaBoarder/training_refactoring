@@ -13,6 +13,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Deprecated
+/**
+ * @deprecated in favour of {@code DriverService, TODO add deprecated docs }
+ */
 public class F1RaceService {
 
     private final F1RaceRepository raceRepo;

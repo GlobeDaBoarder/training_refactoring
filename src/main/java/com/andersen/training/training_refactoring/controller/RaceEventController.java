@@ -1,19 +1,14 @@
 package com.andersen.training.training_refactoring.controller;
 
-import com.andersen.training.training_refactoring.dto.request.RaceEventCreationDto;
-import com.andersen.training.training_refactoring.dto.request.RaceTrackCreationDto;
-import com.andersen.training.training_refactoring.dto.response.RaceEventResponseDto;
-import com.andersen.training.training_refactoring.dto.response.RaceTrackResponseDto;
+import com.andersen.training.training_refactoring.dto.RaceEventCreationDto;
 import com.andersen.training.training_refactoring.service.RaceEventService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("api/v1/race-event")
@@ -24,15 +19,8 @@ public class RaceEventController {
 
 
     @PostMapping
-    public ResponseEntity<RaceEventResponseDto> addRaceEvent(@RequestBody RaceEventCreationDto raceEventCreationDto) {
-        RaceEventResponseDto raceEventResponseDto = raceEventService.addRaceEvent(raceEventCreationDto);
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(raceEventResponseDto.id())
-                .toUri();
-
-        return ResponseEntity.created(location).body(raceEventResponseDto);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addRaceEvent(@RequestBody RaceEventCreationDto raceEventCreationDto) {
+        raceEventService.addRaceEvent(raceEventCreationDto);
     }
 }

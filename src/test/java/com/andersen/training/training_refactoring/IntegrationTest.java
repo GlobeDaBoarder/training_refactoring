@@ -40,7 +40,7 @@ public class IntegrationTest {
     }
 
     @Test
-    @Order(2)
+    @Order(2) // TODO remove order and do SQL
     void getWinningChance_forLewisHamilton_returnsExpectedChance() throws Exception {
 
         double expectedWinningChance = 40.0;

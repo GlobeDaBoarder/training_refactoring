@@ -1,7 +1,6 @@
 package com.andersen.training.training_refactoring.service;
 
-import com.andersen.training.training_refactoring.dto.request.DriverCreationDto;
-import com.andersen.training.training_refactoring.dto.response.DriverResponseDto;
+import com.andersen.training.training_refactoring.dto.DriverCreationDto;
 import com.andersen.training.training_refactoring.entity.Driver;
 import com.andersen.training.training_refactoring.mapper.DriverMapper;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
@@ -15,11 +14,9 @@ public class DriverService {
     private final DriverRepo driverRepo;
     private final DriverMapper driverMapper;
 
-    public DriverResponseDto addDriver(DriverCreationDto driverCreationDto) {
+    public void addDriver(DriverCreationDto driverCreationDto) {
         Driver driverEntity = driverMapper.toDriverEntity(driverCreationDto);
-
         driverRepo.save(driverEntity);
-
-        return driverMapper.toDriverResponseDto(driverEntity);
     }
+
 }
