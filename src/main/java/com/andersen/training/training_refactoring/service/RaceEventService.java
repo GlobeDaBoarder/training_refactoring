@@ -5,7 +5,6 @@ import com.andersen.training.training_refactoring.entity.RaceEvent;
 import com.andersen.training.training_refactoring.entity.RaceResult;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
 import com.andersen.training.training_refactoring.repo.RaceEventRepo;
-import com.andersen.training.training_refactoring.repo.RaceResultRepo;
 import com.andersen.training.training_refactoring.repo.RaceTrackRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,6 @@ import java.util.Set;
 public class RaceEventService {
 
     private final RaceEventRepo raceEventRepo;
-    private final RaceResultRepo raceResultRepo;
     private final DriverRepo driverRepo;
     private final RaceTrackRepo raceTrackRepo;
 
@@ -31,14 +29,12 @@ public class RaceEventService {
                         .driver(driverRepo.getReferenceById(raceResultCreationDto.driverId()))
                         .finishingPosition(raceResultCreationDto.finishingPosition()).build()));
 
-        raceResultRepo.saveAll(raceResultEntities);
-
         RaceEvent raceEventEntity = RaceEvent.builder()
                 .date(raceEventCreationDto.date())
                 .raceTrack(raceTrackRepo.getReferenceById(raceEventCreationDto.raceTrackId()))
                 .raceResults(raceResultEntities)
                 .build();
 
-        raceEventRepo.save(raceEventEntity); //TODO propogation
+        raceEventRepo.save(raceEventEntity);
     }
 }

@@ -1,5 +1,6 @@
 package com.andersen.training.training_refactoring.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -38,7 +39,7 @@ public class RaceEvent {
     @ManyToOne
     private RaceTrack raceTrack;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "race_event_id")
     private Set<RaceResult> raceResults;
 }
