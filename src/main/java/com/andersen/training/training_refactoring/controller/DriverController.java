@@ -6,6 +6,7 @@ import com.andersen.training.training_refactoring.service.PredictionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,9 @@ public class DriverController {
         driverService.addDriver(driverCreationDto);
     }
 
-    @GetMapping()
+    @GetMapping("/{driverId}/winning-chance")
     @ResponseStatus(HttpStatus.OK)
-    public String predictDriverWinningChance() {
-        return predictionService.predictWinningChance();
+    public String predictDriverWinningChance(@PathVariable Long driverId) {
+        return predictionService.predictWinningChance(driverId);
     }
 }
