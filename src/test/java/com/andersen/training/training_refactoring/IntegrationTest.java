@@ -1,16 +1,16 @@
 package com.andersen.training.training_refactoring;
 
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,15 +20,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest()
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Transactional
 public class IntegrationTest {
 
     @Autowired
     MockMvc mockMvc;
 
-
     @Test
-    @Order(1)
+    @Rollback
     void saveRaceResults_withValidInput_returns200() throws Exception {
 
         String raceResultsJson = new String(getClass().getClassLoader().getResourceAsStream("race_results.json").readAllBytes());
@@ -40,7 +39,8 @@ public class IntegrationTest {
     }
 
     @Test
-    @Order(2) // TODO remove order and do SQL
+    @Sql(scripts = "classpath:test-data.sql")
+    @Rollback
     void getWinningChance_forLewisHamilton_returnsExpectedChance() throws Exception {
 
         double expectedWinningChance = 40.0;
