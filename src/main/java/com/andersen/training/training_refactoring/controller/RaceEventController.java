@@ -1,6 +1,6 @@
 package com.andersen.training.training_refactoring.controller;
 
-import com.andersen.training.training_refactoring.dto.RaceEventCreationDto;
+import com.andersen.training.training_refactoring.dto.RaceEventDto;
 import com.andersen.training.training_refactoring.service.RaceEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class RaceEventController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addRaceEvent(@RequestBody RaceEventCreationDto raceEventCreationDto) {
-        raceEventService.addRaceEvent(raceEventCreationDto);
+    public void addRaceEvent(@RequestBody RaceEventDto raceEventDto) {
+        raceEventService.addRaceEvent(raceEventDto);
     }
 }

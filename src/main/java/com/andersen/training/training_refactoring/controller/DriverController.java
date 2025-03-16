@@ -1,6 +1,6 @@
 package com.andersen.training.training_refactoring.controller;
 
-import com.andersen.training.training_refactoring.dto.DriverCreationDto;
+import com.andersen.training.training_refactoring.dto.DriverDto;
 import com.andersen.training.training_refactoring.service.DriverService;
 import com.andersen.training.training_refactoring.service.PredictionService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +23,8 @@ public class DriverController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDriver(@RequestBody DriverCreationDto driverCreationDto) {
-        driverService.addDriver(driverCreationDto);
+    public void addDriver(@RequestBody DriverDto driverDto) {
+        driverService.addDriver(driverDto);
     }
 
     @GetMapping("/{driverId}/winning-chance")

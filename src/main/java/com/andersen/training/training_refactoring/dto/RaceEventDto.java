@@ -1,14 +1,11 @@
 package com.andersen.training.training_refactoring.dto;
 
-import lombok.Builder;
-
 import java.time.LocalDate;
 import java.util.Set;
 
-@Builder
-public record RaceEventCreationDto(
+public record RaceEventDto(
         LocalDate date,
         Long raceTrackId,
-        Set<RaceResultCreationDto> raceResultCreationDtos
+        Set<RaceResultDto> raceResultDtos
 ) {
 }

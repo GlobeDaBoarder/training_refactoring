@@ -1,6 +1,6 @@
 package com.andersen.training.training_refactoring.service;
 
-import com.andersen.training.training_refactoring.dto.RaceTrackCreationDto;
+import com.andersen.training.training_refactoring.dto.RaceTrackDto;
 import com.andersen.training.training_refactoring.entity.RaceTrack;
 import com.andersen.training.training_refactoring.mapper.RaceTrackMapper;
 import com.andersen.training.training_refactoring.repo.RaceTrackRepo;
@@ -14,8 +14,8 @@ public class RaceTrackService {
     private final RaceTrackRepo raceTrackRepo;
     private final RaceTrackMapper raceTrackMapper;
 
-    public void addRaceTrack(RaceTrackCreationDto driverCreationDto) {
-        RaceTrack driverEntity = raceTrackMapper.toDriverEntity(driverCreationDto);
+    public void addRaceTrack(RaceTrackDto raceTrackDto) {
+        RaceTrack driverEntity = raceTrackMapper.toDriverEntity(raceTrackDto);
         raceTrackRepo.save(driverEntity);
     }
 

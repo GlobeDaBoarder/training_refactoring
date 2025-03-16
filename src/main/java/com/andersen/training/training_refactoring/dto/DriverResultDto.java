@@ -4,6 +4,6 @@ package com.andersen.training.training_refactoring.dto;
 public record DriverResultDto(
         String driver,
         String car,
-        int position) {
-
+        int position
+) {
 }

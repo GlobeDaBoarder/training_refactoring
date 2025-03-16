@@ -1,6 +1,6 @@
 package com.andersen.training.training_refactoring.service;
 
-import com.andersen.training.training_refactoring.dto.RaceEventCreationDto;
+import com.andersen.training.training_refactoring.dto.RaceEventDto;
 import com.andersen.training.training_refactoring.entity.RaceEvent;
 import com.andersen.training.training_refactoring.entity.RaceResult;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
@@ -22,16 +22,16 @@ public class RaceEventService {
     private final RaceTrackRepo raceTrackRepo;
 
     @Transactional
-    public void addRaceEvent(RaceEventCreationDto raceEventCreationDto) {
+    public void addRaceEvent(RaceEventDto raceEventDto) {
         Set<RaceResult> raceResultEntities = new HashSet<>();
-        raceEventCreationDto.raceResultCreationDtos().forEach(raceResultCreationDto ->
+        raceEventDto.raceResultDtos().forEach(raceResultDto ->
                 raceResultEntities.add(RaceResult.builder()
-                        .driver(driverRepo.getReferenceById(raceResultCreationDto.driverId()))
-                        .finishingPosition(raceResultCreationDto.finishingPosition()).build()));
+                        .driver(driverRepo.getReferenceById(raceResultDto.driverId()))
+                        .finishingPosition(raceResultDto.finishingPosition()).build()));
 
         RaceEvent raceEventEntity = RaceEvent.builder()
-                .date(raceEventCreationDto.date())
-                .raceTrack(raceTrackRepo.getReferenceById(raceEventCreationDto.raceTrackId()))
+                .date(raceEventDto.date())
+                .raceTrack(raceTrackRepo.getReferenceById(raceEventDto.raceTrackId()))
                 .raceResults(raceResultEntities)
                 .build();
 

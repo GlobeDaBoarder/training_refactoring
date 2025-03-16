@@ -1,6 +1,6 @@
 package com.andersen.training.training_refactoring.controller;
 
-import com.andersen.training.training_refactoring.dto.RaceTrackCreationDto;
+import com.andersen.training.training_refactoring.dto.RaceTrackDto;
 import com.andersen.training.training_refactoring.service.RaceTrackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,8 +19,8 @@ public class RaceTrackController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addRaceTrack(@RequestBody RaceTrackCreationDto raceTrackCreationDto) {
-        raceTrackService.addRaceTrack(raceTrackCreationDto);
+    public void addRaceTrack(@RequestBody RaceTrackDto raceTrackDto) {
+        raceTrackService.addRaceTrack(raceTrackDto);
     }
 
 }

@@ -1,9 +1,6 @@
 package com.andersen.training.training_refactoring.dto;
 
-import lombok.Builder;
-
-@Builder
-public record DriverCreationDto(
+public record DriverDto(
         String driverName,
         String carBrand
 ) {
