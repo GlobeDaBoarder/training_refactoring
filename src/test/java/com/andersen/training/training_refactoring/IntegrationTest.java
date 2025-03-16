@@ -39,7 +39,7 @@ public class IntegrationTest {
     }
 
     @Test
-    @Sql(scripts = "classpath:test-data.sql")
+    @Sql(scripts = "classpath:sql/legacy-api-integration-test-data.sql")
     @Rollback
     void getWinningChance_forLewisHamilton_returnsExpectedChance() throws Exception {
 
