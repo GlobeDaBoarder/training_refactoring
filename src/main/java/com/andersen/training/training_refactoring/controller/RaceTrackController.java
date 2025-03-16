@@ -22,5 +22,4 @@ public class RaceTrackController {
     public void addRaceTrack(@RequestBody RaceTrackDto raceTrackDto) {
         raceTrackService.addRaceTrack(raceTrackDto);
     }
-
 }

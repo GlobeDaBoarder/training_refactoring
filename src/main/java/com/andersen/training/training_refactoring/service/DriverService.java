@@ -18,5 +18,4 @@ public class DriverService {
         Driver driverEntity = driverMapper.toDriverEntity(driverDto);
         driverRepo.save(driverEntity);
     }
-
 }

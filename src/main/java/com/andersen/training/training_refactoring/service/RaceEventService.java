@@ -6,7 +6,6 @@ import com.andersen.training.training_refactoring.entity.RaceResult;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
 import com.andersen.training.training_refactoring.repo.RaceEventRepo;
 import com.andersen.training.training_refactoring.repo.RaceTrackRepo;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ public class RaceEventService {
     private final DriverRepo driverRepo;
     private final RaceTrackRepo raceTrackRepo;
 
-    @Transactional
     public void addRaceEvent(RaceEventDto raceEventDto) {
         Set<RaceResult> raceResultEntities = new HashSet<>();
         raceEventDto.raceResultDtos().forEach(raceResultDto ->

@@ -18,5 +18,4 @@ public class RaceTrackService {
         RaceTrack driverEntity = raceTrackMapper.toDriverEntity(raceTrackDto);
         raceTrackRepo.save(driverEntity);
     }
-
 }
