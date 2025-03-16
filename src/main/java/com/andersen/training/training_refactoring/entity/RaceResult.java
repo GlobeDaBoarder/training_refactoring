@@ -1,6 +1,9 @@
 package com.andersen.training.training_refactoring.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,14 +13,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RaceResult {
-
-    @Builder
-    public RaceResult(Driver driver, Integer finishingPosition) {
-        this.driver = driver;
-        this.finishingPosition = finishingPosition;
-    }
 
     @Id
     @GeneratedValue
@@ -28,4 +25,10 @@ public class RaceResult {
     private Driver driver;
 
     private Integer finishingPosition;
+
+    @Builder
+    private RaceResult(Driver driver, Integer finishingPosition) {
+        this.driver = driver;
+        this.finishingPosition = finishingPosition;
+    }
 }

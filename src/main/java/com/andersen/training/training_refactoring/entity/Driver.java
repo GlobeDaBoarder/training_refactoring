@@ -12,14 +12,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Driver {
-
-    @Builder
-    public Driver(String driverName, String carBrand) {
-        this.driverName = driverName;
-        this.carBrand = carBrand;
-    }
 
     @Id
     @GeneratedValue
@@ -29,4 +23,10 @@ public class Driver {
     private String driverName;
 
     private String carBrand;
+
+    @Builder
+    private Driver(String driverName, String carBrand) {
+        this.driverName = driverName;
+        this.carBrand = carBrand;
+    }
 }

@@ -19,15 +19,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RaceEvent {
-
-    @Builder
-    public RaceEvent(LocalDate date, RaceTrack raceTrack, Set<RaceResult> raceResults) {
-        this.date = date;
-        this.raceTrack = raceTrack;
-        this.raceResults = raceResults;
-    }
 
     @Id
     @GeneratedValue
@@ -42,4 +35,11 @@ public class RaceEvent {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "race_event_id")
     private Set<RaceResult> raceResults;
+
+    @Builder
+    private RaceEvent(LocalDate date, RaceTrack raceTrack, Set<RaceResult> raceResults) {
+        this.date = date;
+        this.raceTrack = raceTrack;
+        this.raceResults = raceResults;
+    }
 }
