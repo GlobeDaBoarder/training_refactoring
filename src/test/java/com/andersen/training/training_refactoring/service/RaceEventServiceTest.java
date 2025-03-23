@@ -51,8 +51,7 @@ class RaceEventServiceTest {
     RaceEventService raceEventService;
 
     @Test
-    void addRaceEvent() {
-
+    void addRaceEvent_withRaceEventDto_createsRaceEvent() {
         RaceEventDto raceEventDto = buildRaceEventDto();
         RaceEvent expectedSavedRaceEvent = buildExpectedRaceEvent();
 

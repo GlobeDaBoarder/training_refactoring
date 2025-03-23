@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: training_refactoring
+  datasource:
+    url: jdbc:postgresql://localhost:5432/f1_db
+    username: f1_user
+    password: secretpassword
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  mvc:
+    problemdetails:
+      enabled: false

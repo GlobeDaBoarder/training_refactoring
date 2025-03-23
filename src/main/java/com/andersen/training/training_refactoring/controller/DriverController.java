@@ -5,6 +5,7 @@ import com.andersen.training.training_refactoring.service.DriverService;
 import com.andersen.training.training_refactoring.service.PredictionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class DriverController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDriver(@RequestBody DriverDto driverDto) {
+    public void addDriver(@RequestBody @Validated DriverDto driverDto) {
         driverService.addDriver(driverDto);
     }
 
