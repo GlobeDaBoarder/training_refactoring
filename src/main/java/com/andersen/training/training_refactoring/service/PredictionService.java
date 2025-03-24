@@ -1,6 +1,7 @@
 package com.andersen.training.training_refactoring.service;
 
 import com.andersen.training.training_refactoring.entity.Driver;
+import com.andersen.training.training_refactoring.exception.DriverNotFoundException;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
 import com.andersen.training.training_refactoring.repo.RaceResultRepo;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,8 @@ public class PredictionService {
     // 2. "Power" of the team with for example 0.2 multiplier. Come up with power indexes for different cars
     // 3. Calculate chance including previous positions within top 5. Come up with cooficients for getting 2nd, 3rd, etc places.
     public String predictWinningChance(Long driverId) {
-
-        Driver driverReference = driverRepo.getReferenceById(driverId);
+        Driver driverReference = driverRepo.findById(driverId)
+                .orElseThrow(() ->  new DriverNotFoundException(driverId));
         long totalRaces = raceResultRepo.countAllByDriver(driverReference);
         long wonRaces = raceResultRepo.countAllByDriverAndFinishingPositionIsFirst(driverReference);
 

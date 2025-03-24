@@ -11,3 +11,6 @@ spring:
   mvc:
     problemdetails:
       enabled: false
+logging:
+  level:
+    web: debug
