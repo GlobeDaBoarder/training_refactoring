@@ -35,7 +35,7 @@ class DriverServiceTest {
     }
 
     @Test
-    void addDriver_withDriverDto_callsDriverRepo() {
+    void addDriver_withValidDriverDto_expectedSuccessfulDriverCreation() {
         DriverDto driverDto = new DriverDto("Lewis Hamilton", "Mercedes");
         when(driverRepo.save(any()))
                 .thenReturn(mock(Driver.class));

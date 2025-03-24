@@ -6,8 +6,6 @@ import com.andersen.training.training_refactoring.service.DriverService;
 import com.andersen.training.training_refactoring.service.PredictionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
@@ -26,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = DriverController.class)
-@ExtendWith(MockitoExtension.class)
 class DriverControllerTest {
 
     private static final String DRIVER_API_BASE_PATH = "/api/v1/driver";
@@ -53,8 +50,8 @@ class DriverControllerTest {
         String serializedDriverDto = objectMapper.writeValueAsString(driverDto);
 
         mockMvc.perform(post(DRIVER_API_BASE_PATH)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(serializedDriverDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(serializedDriverDto))
                 .andExpect(status().isCreated());
 
         verify(driverService).addDriver(refEq(driverDto));

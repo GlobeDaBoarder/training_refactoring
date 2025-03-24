@@ -6,6 +6,8 @@ import com.andersen.training.training_refactoring.entity.Driver;
 import com.andersen.training.training_refactoring.entity.RaceEvent;
 import com.andersen.training.training_refactoring.entity.RaceResult;
 import com.andersen.training.training_refactoring.entity.RaceTrack;
+import com.andersen.training.training_refactoring.exception.DriverNotFoundException;
+import com.andersen.training.training_refactoring.exception.RaceTrackNotFoundException;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
 import com.andersen.training.training_refactoring.repo.RaceEventRepo;
 import com.andersen.training.training_refactoring.repo.RaceTrackRepo;
@@ -18,11 +20,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,7 +36,7 @@ class RaceEventServiceTest {
     static final int FINISHING_POSITION = 1;
     static final long DRIVER_ID = 1L;
     static final long TRACK_ID = 1L;
-    static final LocalDate RACE_EVENT_DATE = LocalDate.of(2025, FINISHING_POSITION, FINISHING_POSITION);
+    static final LocalDate RACE_EVENT_DATE = LocalDate.of(2025, 1, 1);
     static final Driver DRIVER = new Driver();
     static final RaceTrack TRACK = new RaceTrack();
 
@@ -51,14 +56,14 @@ class RaceEventServiceTest {
     RaceEventService raceEventService;
 
     @Test
-    void addRaceEvent_withRaceEventDto_createsRaceEvent() {
+    void addRaceEvent_withValidRaceEventDto_createsRaceEvent() {
         RaceEventDto raceEventDto = buildRaceEventDto();
         RaceEvent expectedSavedRaceEvent = buildExpectedRaceEvent();
 
-        when(driverRepo.getReferenceById(DRIVER_ID))
-                .thenReturn(DRIVER);
-        when(raceTrackRepo.getReferenceById(TRACK_ID))
-                .thenReturn(TRACK);
+        when(driverRepo.findById(DRIVER_ID))
+                .thenReturn(Optional.of(DRIVER));
+        when(raceTrackRepo.findById(TRACK_ID))
+                .thenReturn(Optional.of(TRACK));
         when(raceEventRepo.save(any()))
                 .thenReturn(new RaceEvent());
 
@@ -70,6 +75,35 @@ class RaceEventServiceTest {
                 .usingRecursiveComparison()
                 .ignoringFields("id")
                 .isEqualTo(expectedSavedRaceEvent);
+    }
+
+    @Test
+    void addRaceEvent_whenDriverDoesNotExist_throwsDriverNotFoundException() {
+        RaceEventDto raceEventDto = buildRaceEventDto();
+
+        when(driverRepo.findById(DRIVER_ID))
+                .thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(DriverNotFoundException.class).isThrownBy(() ->
+                raceEventService.addRaceEvent(raceEventDto));
+
+        verifyNoInteractions(raceTrackRepo);
+        verifyNoInteractions(raceEventRepo);
+    }
+
+    @Test
+    void addRaceEvent_whenRaceTrackDoesNotExist_throwsRaceTrackNotFoundException() {
+        RaceEventDto raceEventDto = buildRaceEventDto();
+
+        when(driverRepo.findById(DRIVER_ID))
+                .thenReturn(Optional.of(DRIVER));
+        when(raceTrackRepo.findById(TRACK_ID))
+                .thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(RaceTrackNotFoundException.class).isThrownBy(() ->
+                raceEventService.addRaceEvent(raceEventDto));
+
+        verifyNoInteractions(raceEventRepo);
     }
 
     private RaceEventDto buildRaceEventDto() {

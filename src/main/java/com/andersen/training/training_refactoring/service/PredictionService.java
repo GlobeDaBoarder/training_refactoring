@@ -21,10 +21,10 @@ public class PredictionService {
     // 2. "Power" of the team with for example 0.2 multiplier. Come up with power indexes for different cars
     // 3. Calculate chance including previous positions within top 5. Come up with cooficients for getting 2nd, 3rd, etc places.
     public String predictWinningChance(Long driverId) {
-        Driver driverReference = driverRepo.findById(driverId)
+        Driver driver = driverRepo.findById(driverId)
                 .orElseThrow(() ->  new DriverNotFoundException(driverId));
-        long totalRaces = raceResultRepo.countAllByDriver(driverReference);
-        long wonRaces = raceResultRepo.countAllByDriverAndFinishingPositionIsFirst(driverReference);
+        long totalRaces = raceResultRepo.countAllByDriver(driver);
+        long wonRaces = raceResultRepo.countAllByDriverAndFinishingPositionIsFirst(driver);
 
         return calculatePrediction(totalRaces, wonRaces);
     }

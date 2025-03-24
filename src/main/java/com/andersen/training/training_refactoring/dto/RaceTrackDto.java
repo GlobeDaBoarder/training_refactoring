@@ -5,7 +5,9 @@ import com.andersen.training.training_refactoring.dto.validation.annotation.Alph
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
+@Builder
 public record RaceTrackDto(
 
         @JsonDeserialize(using = TrimAndNormalizeStringDeserializer.class)

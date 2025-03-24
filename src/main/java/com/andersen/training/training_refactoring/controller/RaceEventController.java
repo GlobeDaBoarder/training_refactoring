@@ -4,6 +4,7 @@ import com.andersen.training.training_refactoring.dto.RaceEventDto;
 import com.andersen.training.training_refactoring.service.RaceEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,9 @@ public class RaceEventController {
 
     private final RaceEventService raceEventService;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addRaceEvent(@RequestBody RaceEventDto raceEventDto) {
+    public void addRaceEvent(@Validated @RequestBody RaceEventDto raceEventDto) {
         raceEventService.addRaceEvent(raceEventDto);
     }
 }
