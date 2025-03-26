@@ -12,10 +12,12 @@ import java.lang.annotation.Target;
 
 @Documented
 @Constraint(validatedBy = AlphabeticValidator.class)
-@Target({ ElementType.FIELD, ElementType.PARAMETER })
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Alphabetic {
     String message() default "Must contain only alphabetic characters";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

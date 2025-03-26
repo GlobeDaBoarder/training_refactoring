@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
         return enhanceProblemDetail(baseProblemDetail, runtimeException);
     }
 
-    private ProblemDetail enhanceProblemDetail(ProblemDetail baseProblemDetail, Throwable exception){
+    private ProblemDetail enhanceProblemDetail(ProblemDetail baseProblemDetail, Throwable exception) {
         if (includeNonProdDebugDetails) {
             ExtendedDebugProblemDetail extendedDebugProblemDetail = new ExtendedDebugProblemDetail(baseProblemDetail);
             extendedDebugProblemDetail.setTimestamp(OffsetDateTime.now());

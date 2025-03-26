@@ -22,7 +22,7 @@ public class PredictionService {
     // 3. Calculate chance including previous positions within top 5. Come up with cooficients for getting 2nd, 3rd, etc places.
     public String predictWinningChance(Long driverId) {
         Driver driver = driverRepo.findById(driverId)
-                .orElseThrow(() ->  new DriverNotFoundException(driverId));
+                .orElseThrow(() -> new DriverNotFoundException(driverId));
         long totalRaces = raceResultRepo.countAllByDriver(driver);
         long wonRaces = raceResultRepo.countAllByDriverAndFinishingPositionIsFirst(driver);
 

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Deprecated
 @Repository
-public interface F1RaceRepository extends JpaRepository<F1RaceEntity, Long> {}
+public interface F1RaceRepository extends JpaRepository<F1RaceEntity, Long> {
+}

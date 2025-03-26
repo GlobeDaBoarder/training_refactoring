@@ -5,7 +5,6 @@ import com.andersen.training.training_refactoring.dto.F1RaceResultsDto;
 import com.andersen.training.training_refactoring.entity.F1RaceEntity;
 import com.andersen.training.training_refactoring.repo.F1RaceRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class F1RaceService {
 
     public void saveRaces(List<F1RaceResultsDto> races) {
         for (F1RaceResultsDto race : races) {
-            for (DriverResultDto driver: race.results()) {
+            for (DriverResultDto driver : race.results()) {
                 F1RaceEntity entity = new F1RaceEntity();
                 entity.setDate(race.date());
                 entity.setCountry(race.country());

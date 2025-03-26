@@ -8,12 +8,12 @@ import java.io.IOException;
 
 public class TrimAndNormalizeStringDeserializer extends JsonDeserializer<String> {
 
-        @Override
-        public String deserialize(JsonParser parser, DeserializationContext context) throws IOException {
-            String value = parser.getValueAsString();
-            if (value == null)
-                return null;
+    @Override
+    public String deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+        String value = parser.getValueAsString();
+        if (value == null)
+            return null;
 
-            return value.trim().replaceAll("\\s+", " ");
-        }
+        return value.trim().replaceAll("\\s+", " ");
+    }
 }
