@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Legacy API controller, responsible for creation of race events, tracks, drivers and their result among events in single request.
- *
- * @deprecated in favour of {@code {@link DriverController}}, {@code {@link RaceEventController} and {@code {@link RaceTrackController}}.
- * @since 2.0.0
- */
+/// Legacy API controller, responsible for creation of race events, tracks, drivers and their result among events in single request.
+///
+/// @deprecated in favour of {@link DriverController}, {@link RaceEventController} and  {@link RaceTrackController}
+/// @author Gleb
+/// @since 2.0.0
 @RestController
 @RequestMapping("/races")
 @RequiredArgsConstructor

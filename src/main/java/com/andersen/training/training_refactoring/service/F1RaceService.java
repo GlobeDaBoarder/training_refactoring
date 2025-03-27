@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/// ### Deprecated DTO in legacy F1 API
+///
+/// @deprecated Use {@link DriverService}, {@link PredictionService}, {@link RaceEventService}
+///  and {@link RaceTrackService} instead.
+///
+/// @author Gleb
+/// @since 2.0.0
 @Service
 @RequiredArgsConstructor
 @Deprecated
-/**
- * @deprecated in favour of {@code DriverService, TODO add deprecated docs }
- */
 public class F1RaceService {
 
     private final F1RaceRepository raceRepo;

@@ -24,6 +24,8 @@ public class RaceEventService {
     private final DriverRepo driverRepo;
     private final RaceTrackRepo raceTrackRepo;
 
+    /// @throws DriverNotFoundException if driver with given id not found
+    /// @throws RaceTrackNotFoundException if racetrack with given id not found
     public void addRaceEvent(RaceEventDto raceEventDto) {
         Set<RaceResult> raceResultEntities = new HashSet<>();
         raceEventDto.raceResultDtos().forEach(raceResultDto ->

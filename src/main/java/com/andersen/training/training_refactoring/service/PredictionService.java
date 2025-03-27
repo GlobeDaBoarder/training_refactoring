@@ -25,6 +25,7 @@ public class PredictionService {
     private final RaceResultRepo raceResultRepo;
     private final DriverRepo driverRepo;
 
+    ///  @throws DriverNotFoundException if driver with given id is not found
     public String predictWinningChance(Long driverId) {
         Driver driver = driverRepo.findById(driverId)
                 .orElseThrow(() -> new DriverNotFoundException(driverId));

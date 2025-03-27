@@ -36,6 +36,8 @@ public class GlobalExceptionHandler {
         return enhanceProblemDetail(baseProblemDetail, notFoundException);
     }
 
+    /// Handles request DTO validation errors, that are handled by jakarta bean validation
+    /// Results in 400 Bad Request response, alongside extracted validation error details
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ProblemDetail handleMethodArgumentNotValidException(MethodArgumentNotValidException argumentNotValidException) {
@@ -54,6 +56,7 @@ public class GlobalExceptionHandler {
         return enhanceProblemDetail(baseProblemDetail, runtimeException);
     }
 
+    /// Enhances the base ProblemDetail with additional debug information if the application is running in a non-production environment.
     private ProblemDetail enhanceProblemDetail(ProblemDetail baseProblemDetail, Throwable exception) {
         if (includeNonProdDebugDetails) {
             ExtendedDebugProblemDetail extendedDebugProblemDetail = new ExtendedDebugProblemDetail(baseProblemDetail);

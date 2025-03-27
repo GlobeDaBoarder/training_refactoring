@@ -9,6 +9,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ProblemDetail;
 
+/// This interface defines the racetrack API using Swagger annotations, used for generating API documentation.
+///
+/// @author Gleb
+/// @since 2.0.0
 @Tag(name = "Race Track", description = "API for managing race tracks")
 public interface RaceTrackApi {
 

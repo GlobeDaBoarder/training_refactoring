@@ -7,6 +7,10 @@ import jakarta.validation.ConstraintValidatorContext;
 
 import java.util.regex.Pattern;
 
+/// ### Validator used for @{link Alphabetic} annotation.
+///
+/// @author Gleb
+/// @since 2.0.0
 public class AlphabeticValidator implements ConstraintValidator<Alphabetic, String> {
 
     private Pattern alphabeticPattern;

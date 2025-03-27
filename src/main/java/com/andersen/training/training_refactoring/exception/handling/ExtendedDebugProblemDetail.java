@@ -6,6 +6,12 @@ import org.springframework.http.ProblemDetail;
 
 import java.time.OffsetDateTime;
 
+/// Extended version of ProblemDetail to include additional debugging information.
+/// This class extends the ProblemDetail class and adds fields for timestamp,
+/// detailed debug message, and cause.
+///
+/// @author Gleb
+/// @since 2.0.0
 @Getter
 @Setter
 public class ExtendedDebugProblemDetail extends ProblemDetail {

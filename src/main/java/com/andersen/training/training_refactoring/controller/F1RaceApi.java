@@ -13,6 +13,11 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+/// This interface defines the legacy F1 API using Swagger annotations, used for generating API documentation.
+///
+/// @deprecated in favour of {@link DriverApi}, {@link RaceEventApi} and  {@link RaceTrackApi}
+/// @author Gleb
+/// @since 2.0.0
 @Tag(
         name = "F1 Race (Legacy)",
         description = "Legacy API controller for creating race events, tracks, drivers and their results in a single request. Deprecated in favour of DriverController, RaceEventController, and RaceTrackController."
