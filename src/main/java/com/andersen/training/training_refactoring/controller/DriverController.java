@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/driver")
 @RequiredArgsConstructor
-public class DriverController {
+public class DriverController implements DriverApi {
 
     private final DriverService driverService;
     private final PredictionService predictionService;

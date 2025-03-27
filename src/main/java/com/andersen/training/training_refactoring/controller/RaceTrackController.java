@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/race-track")
 @RequiredArgsConstructor
-public class RaceTrackController {
+public class RaceTrackController implements RaceTrackApi{
 
     private final RaceTrackService raceTrackService;
 

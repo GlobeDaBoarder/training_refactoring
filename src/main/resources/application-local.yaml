@@ -14,3 +14,9 @@ spring:
 logging:
   level:
     web: debug
+
+springdoc:
+  swagger-ui:
+    path: /
+  api-docs:
+    path: /api-docs

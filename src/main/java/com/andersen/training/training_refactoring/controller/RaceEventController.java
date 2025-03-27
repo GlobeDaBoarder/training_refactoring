@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/race-event")
 @RequiredArgsConstructor
-public class RaceEventController {
+public class RaceEventController implements RaceEventApi {
 
     private final RaceEventService raceEventService;
 
