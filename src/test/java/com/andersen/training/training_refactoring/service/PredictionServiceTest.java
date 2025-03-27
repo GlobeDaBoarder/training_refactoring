@@ -1,6 +1,7 @@
 package com.andersen.training.training_refactoring.service;
 
 import com.andersen.training.training_refactoring.entity.Driver;
+import com.andersen.training.training_refactoring.exception.DriverNotFoundException;
 import com.andersen.training.training_refactoring.repo.DriverRepo;
 import com.andersen.training.training_refactoring.repo.RaceResultRepo;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,7 +29,7 @@ public class PredictionServiceTest {
     private PredictionService predictionService;
 
     @Test
-    public void testPredictWinningChance_totalRacesZero() {
+    public void predictWinningChance_withZeroTotalRaces_returnsZero() {
         Long driverId = 1L;
         Driver driver = new Driver();
 
@@ -43,7 +45,17 @@ public class PredictionServiceTest {
     }
 
     @Test
-    public void testPredictWinningChance_mixedPositions() {
+    public void predictWinningChance_withInvalidId_throwsDriverNotFound() {
+        Long driverId = 1L;
+        when(driverRepo.findById(driverId)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> predictionService.predictWinningChance(driverId))
+                .isInstanceOf(DriverNotFoundException.class)
+                .hasMessageContaining(driverId.toString());
+    }
+
+    @Test
+    public void predictWinningChance_withMixedPositions_ReturnsExpectedResult() {
         Long driverId = 1L;
         Driver driver = new Driver();
 
