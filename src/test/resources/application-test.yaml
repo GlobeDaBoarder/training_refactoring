@@ -1,6 +1,13 @@
 spring:
+  application:
+    name: test
   datasource:
     url: jdbc:tc:postgresql:15://f1_db
   jpa:
     hibernate:
       ddl-auto: create-drop
+springdoc:
+  swagger-ui:
+    path: /
+  api-docs:
+    path: /api-docs
